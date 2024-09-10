@@ -1,4 +1,5 @@
 package org.example;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Player {
@@ -26,10 +27,28 @@ public class Player {
         ad += Integer.parseInt(points[1]);
         ap += Integer.parseInt(points[2]);
         System.out.printf("체력: %d, 공격력: %d, 마법력: %d", hp, ad, ap);
+
+        scanner.close();
     }
 
-    public static void main(String[] args) {
-        Player player = new Player();
-        player.setStatus(13);
+    public void setPlayers(int point) {
+        Scanner scanner = new Scanner(System.in);
+        ArrayList<Player> playerList = new ArrayList<>();
+
+        System.out.println("플레이어 인원을 정하세요: ");
+        int count = Integer.parseInt(scanner.nextLine());
+
+        for (int i=0; i < count; i++) {
+            Player player = new Player();
+            player.setStatus(point); // 여기서 포인트 어떻게넣지?
+            playerList.add(player);
+        }
+        scanner.close();
     }
+
+
+//    public static void main(String[] args) {
+//        Player player = new Player();
+//        player.setStatus(13);
+//    }
 }
