@@ -8,11 +8,11 @@ import org.springframework.boot.test.system.OutputCaptureExtension;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @ExtendWith(OutputCaptureExtension.class)
-public class AppTest {
+public class MainTest {
 
     @Test
     void testHello(CapturedOutput capture) throws Exception {
-        App.main(new String[]{});
+        Main.main(new String[]{});
         assertThat(capture.toString()).isEqualToIgnoringNewLines("Hello World!");
     }
 }
