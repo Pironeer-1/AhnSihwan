@@ -151,8 +151,9 @@ public class Player {
 
                     default:
                         System.out.println("유효한 숫자를 입력하세요. (1: 스테이터스 확인 + 일반 공격, 2: 기본 공격, 3: 마법 공격, 4: 체력 회복\n");
-                        break;
+                        continue;
                 }
+                break;
 
             } catch (NumberFormatException e) {
                 System.out.println("잘못된 입력입니다. 숫자를 입력해주세요.\n");
