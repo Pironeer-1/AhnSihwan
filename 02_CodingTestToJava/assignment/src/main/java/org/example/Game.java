@@ -9,7 +9,6 @@ public class Game {
         return playerList;
     }
 
-
     public void setPlayers(int point) { // 플레이어 초기세팅
         Scanner scanner = new Scanner(System.in);
         System.out.println("플레이어 인원을 정하세요: ");
@@ -36,6 +35,8 @@ public class Game {
         int playerCount = getPlayers().size();
         enemy = new Enemy(playerCount);
     }
+
+
 
 
     // While turn_check (*player_list의 모든 player.Hp 가 0 이거나 enemy.hp=0 일 때까지)
