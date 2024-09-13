@@ -48,7 +48,7 @@ public class Enemy {
         int damage = getAd();
         player.decreaseHp(damage);
 
-        System.out.printf("%d번 유저에게 %d의 데미지. 적의 공격으로 현재 남은 체력은 %d입니다.", playerIndex + 1, damage, player.getHp());
+        System.out.printf("%d번 유저에게 %d의 데미지. 적의 공격으로 현재 남은 체력은 %d입니다.\n", playerIndex + 1, damage, player.getHp());
     }
 
     public void selfHeal(){
@@ -66,12 +66,12 @@ public class Enemy {
     }
 
     public void attack(Player player, int playerIndex) {
-        System.out.println("------------------------------------------------------------------------------");
-        System.out.println("적의 차례입니다.");
+        System.out.println("------------------------------------------------------------------------------\n");
+        System.out.println("적의 차례입니다.\n");
         int enemyAction = (int) (Math.random() * 10) + 1; // 1~10 사이 랜덤정수
 
         if (enemyAction == 1) {
-            System.out.println("적은 섣불리 움직이지 못하고 있습니다.");
+            System.out.println("적은 섣불리 움직이지 못하고 있습니다.\n");
         } else if (2 <= enemyAction && enemyAction <= 8) {
             basicAttack(player, playerIndex);
         } else {

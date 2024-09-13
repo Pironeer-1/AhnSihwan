@@ -85,7 +85,7 @@ public class Player {
     }
 
     public void checkStatus(Enemy enemy) {
-        System.out.printf("현재 유저: 체력 %d, 공격력 %d, 마법력 %d", getHp(), getAd(), getAp());
+        System.out.printf("현재 유저: 체력 %d, 공격력 %d, 마법력 %d\n", getHp(), getAd(), getAp());
         System.out.printf("적: 체력 %d, 공격력 %d, 방어력 %d, 마법 방어력 %d\n", enemy.getHp(), enemy.getAd(), enemy.getAdDefense(), enemy.getApDefense());
         int damage = getAd() - enemy.getAdDefense();
         enemy.decreaseHp(damage);
