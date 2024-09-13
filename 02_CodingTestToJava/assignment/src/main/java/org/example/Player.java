@@ -34,8 +34,7 @@ public class Player {
         this.ap = ap;
     }
 
-    public void setStatus(int point) {
-        Scanner scanner = new Scanner(System.in);
+    public void setStatus(int point, Scanner scanner) {
         System.out.println("------------------------------------------------------------------------------");
         System.out.printf("%d만큼의 스테이터스를 추가합니다. 체력, 공격력, 마법력 순으로 입력하세요\n(1 포인트 당 체력 = 3, 공격력 = 1, 마법력 = 1 증가)\n", point);
         System.out.println("플레이어의 기본 스탯은 체력: 50, 공격력: 10, 마법력: 5입니다.\n");
@@ -45,7 +44,7 @@ public class Player {
             String input = scanner.nextLine();
             String[] points = input.split(" ");
 
-            // 입력값 오류 겁증(1) 3개 값 아닌 경우
+            // 입력값 오류 검증
             if (points.length != 3) {
                 System.out.println("세 개의 값을 입력하세요.");
                 continue;
@@ -56,7 +55,7 @@ public class Player {
                 int adPoint = Integer.parseInt(points[1]);
                 int apPoint = Integer.parseInt(points[2]);
 
-                if (hpPoint + adPoint + apPoint != point) { // 입력값 오류 검증(3) 총합이 point 와 다른 경우
+                if (hpPoint + adPoint + apPoint != point) {
                     System.out.printf("입력한 능력치의 총합이 %d와 같아야 합니다. 다시 입력해주세요.\n", point);
                     continue;
                 } else {
@@ -70,10 +69,9 @@ public class Player {
                     System.out.printf("체력: %d, 공격력: %d, 마법력: %d \n", getHp(), getAd(), getAp());
                     break;
                 }
-            } catch (NumberFormatException e) { // 입력값 오류 겁증(2) 숫자 아닌 경우
+            } catch (NumberFormatException e) {
                 System.out.println("숫자를 입력해주세요.");
             }
-
         }
     }
 
