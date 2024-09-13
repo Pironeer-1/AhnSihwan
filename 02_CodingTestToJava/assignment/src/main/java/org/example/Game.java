@@ -5,12 +5,14 @@ import java.util.Scanner;
 
 public class Game {
     private ArrayList<Player> playerList = new ArrayList<>();
+    private Enemy enemy;
+    private Scanner scanner = new Scanner(System.in);
+
     public ArrayList<Player> getPlayers() {
         return playerList;
     }
 
     public void setPlayers(int point) { // 플레이어 초기세팅
-        Scanner scanner = new Scanner(System.in);
         System.out.println("플레이어 인원을 정하세요: ");
         int playerCount = Integer.parseInt(scanner.nextLine());
 
@@ -20,15 +22,6 @@ public class Game {
             player.setStatus(point);
             playerList.add(player);
         }
-        scanner.close();
-    }
-
-    private Enemy enemy;
-    public Enemy getEnemy() {
-        return enemy;
-    }
-    public void setEnemy(Enemy enemy) {
-        this.enemy = enemy;
     }
 
     public void setEnemy() {
@@ -36,29 +29,43 @@ public class Game {
         enemy = new Enemy(playerCount);
     }
 
+    public boolean turnCheck() {
+        playerList.removeIf(player -> player.getHp() <= 0);
+        return !playerList.isEmpty() && enemy.getHp() != 0;
+        // 플레이어 리스트 남아있고, 적 hp 0 이상이면 turnCheck = True
+    }
 
 
+    public void game() {
+        setPlayers(13);
+        setEnemy();
 
-    // While turn_check (*player_list의 모든 player.Hp 가 0 이거나 enemy.hp=0 일 때까지)
-        // [ Player의 턴 ]
-        // for 문으로 player_list 에서 반복
-                // Player.attack(~~)
-                // if (Enemy.hp == 0){
-                    //  break};
-        // [ Enemy의 턴 ]
-        // if (turn_check)
-            // target player 지정
-            // Enemy.attack(target_player)
+        // 턴 반복
+        while (turnCheck()) {
+            // 플레이어의 턴
+            for (int playerIndex = 0; playerIndex < playerList.size(); playerIndex++) {
+                Player player = playerList.get(playerIndex);
+                player.attack(enemy, playerIndex, scanner);
 
-    // if (Enemy.hp <= 0){
-    //   "승리"
-    // } else {
-    //   "패배" }
+                if (enemy.getHp() == 0) {
+                    System.out.println("축하합니다! 승리하셨습니다!");
+                    break;
+                }
+            }
+            // 적의 턴
+            if (turnCheck()) {
+                int targetIndex = (int) (Math.random() * playerList.size());
+                Player targetPlayer = playerList.get(targetIndex);
+                enemy.attack(targetPlayer, targetIndex);
 
-//    public static void main(String[] args) {
-//        Game game = new Game();
-//        game.setPlayers(13);
-//        game.setEnemy();
-//    }
-
+                if (playerList.isEmpty()) {
+                    System.out.println("아쉽지만 패배하셨습니다.");
+                    return;
+                }
+            } else {
+                break;
+            }
+        }
+        scanner.close();
+    }
 }

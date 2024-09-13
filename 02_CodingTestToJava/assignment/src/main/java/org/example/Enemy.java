@@ -65,7 +65,7 @@ public class Enemy {
         }
     }
 
-    public void action(Player player, int playerIndex) {
+    public void attack(Player player, int playerIndex) {
         System.out.println("------------------------------------------------------------------------------");
         System.out.println("적의 차례입니다.");
         int enemyAction = (int) (Math.random() * 10) + 1; // 1~10 사이 랜덤정수
