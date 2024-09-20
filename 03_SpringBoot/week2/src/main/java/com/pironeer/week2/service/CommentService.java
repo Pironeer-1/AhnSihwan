@@ -21,7 +21,7 @@ public class CommentService {
         Comment comment = Comment.builder()
                 .content(request.content())
                 .topicId(request.topicId())
-                .topicId(request.topicId())
+                .parentId(request.topicId())
                 .createdAt(now)
                 .updatedAt(now)
                 .build();
