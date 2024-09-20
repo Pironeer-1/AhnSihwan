@@ -2,7 +2,6 @@ package com.pironeer.week2.service;
 
 
 import com.pironeer.week2.dto.request.CommentCreateRequest;
-import com.pironeer.week2.dto.request.CommentUpdateRequest;
 import com.pironeer.week2.dto.response.CommentResponse;
 import com.pironeer.week2.repository.CommentRepository;
 import com.pironeer.week2.repository.domain.Comment;
