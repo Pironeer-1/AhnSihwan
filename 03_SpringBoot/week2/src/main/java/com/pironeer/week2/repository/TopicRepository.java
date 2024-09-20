@@ -4,6 +4,7 @@ import com.pironeer.week2.repository.domain.Topic;
 import org.springframework.stereotype.Repository;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.concurrent.atomic.AtomicLong;
@@ -21,5 +22,9 @@ public class TopicRepository {
 
     public Optional<Topic> findById(Long id) {
         return Optional.ofNullable(topicMap.get(id));
+    }
+
+    public List<Topic> findAll() {
+        return topicMap.values().stream().toList();
     }
 }
