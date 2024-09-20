@@ -56,5 +56,9 @@ public class TopicService {
             topic.setContent(content);
         }
     }
+
+    public void deleteById(Long id) {
+        topicRepository.deleteById(id);
+    }
 }
 

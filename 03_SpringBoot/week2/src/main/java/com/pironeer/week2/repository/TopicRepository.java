@@ -2,6 +2,7 @@ package com.pironeer.week2.repository;
 
 import com.pironeer.week2.repository.domain.Topic;
 import org.springframework.stereotype.Repository;
+import org.springframework.util.Assert;
 
 import java.util.HashMap;
 import java.util.List;
@@ -30,5 +31,10 @@ public class TopicRepository {
 
     public List<Topic> findAll() {
         return topicMap.values().stream().toList();
+    }
+
+    public void deleteById(Long id) {
+        Assert.notNull(id, "ID MUST NOT BE NULL");
+        topicMap.remove(id);
     }
 }
