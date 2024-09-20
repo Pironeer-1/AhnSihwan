@@ -3,6 +3,7 @@ package com.pironeer.week2.service;
 import com.pironeer.week2.dto.request.TopicCreateRequest;
 import com.pironeer.week2.dto.request.TopicUpdateRequest;
 import com.pironeer.week2.dto.response.TopicResponse;
+import com.pironeer.week2.mapper.TopicMapper;
 import com.pironeer.week2.repository.TopicRepository;
 import com.pironeer.week2.repository.domain.Topic;
 import lombok.RequiredArgsConstructor;
@@ -17,12 +18,7 @@ public class TopicService {
     private final TopicRepository topicRepository;
 
     public void save(TopicCreateRequest request) {
-        Topic topic = Topic.builder()
-                .title(request.title())
-                .content(request.content())
-                .createdAt(LocalDateTime.now())
-                .updatedAt(LocalDateTime.now())
-                .build();
+        Topic topic = TopicMapper.from(request); // Mapper 활용
         topicRepository.save(topic);
     }
 

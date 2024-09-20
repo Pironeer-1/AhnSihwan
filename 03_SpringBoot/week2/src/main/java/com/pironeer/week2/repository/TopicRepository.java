@@ -34,7 +34,7 @@ public class TopicRepository {
     }
 
     public void deleteById(Long id) {
-        Assert.notNull(id, "ID MUST NOT BE NULL");
+        Assert.notNull(id, "ID MUST NOT BE NULL"); // id 검사 후 null이면 예외 발생
         topicMap.remove(id);
     }
 }
