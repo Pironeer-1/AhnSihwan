@@ -1,6 +1,7 @@
 package com.pironeer.week2.controller;
 
 import com.pironeer.week2.dto.request.TopicCreateRequest;
+import com.pironeer.week2.dto.request.TopicUpdateRequest;
 import com.pironeer.week2.dto.response.TopicResponse;
 import com.pironeer.week2.repository.domain.Topic;
 import com.pironeer.week2.service.TopicService;
@@ -32,5 +33,11 @@ public class TopicController {
     public ResponseEntity<List<TopicResponse>> readAll() {
         List<TopicResponse> responses = topicService.findAll();
         return ResponseEntity.ok().body(responses);
+    }
+
+    @PatchMapping
+    public ResponseEntity<TopicResponse> update(@RequestBody TopicUpdateRequest request) {
+        TopicResponse response = topicService.update(request);
+        return ResponseEntity.ok().body(response);
     }
 }

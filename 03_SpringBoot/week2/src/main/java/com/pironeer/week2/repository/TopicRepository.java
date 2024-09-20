@@ -15,9 +15,13 @@ public class TopicRepository {
     private final Map<Long, Topic> topicMap = new HashMap<>();
 
     public void save(Topic topic) {
-        Long id = topicIdxGenerator.incrementAndGet();
-        topic.setId(id);
-        topicMap.put(id, topic);
+        if (topic.getId() == null) {
+            Long id = topicIdxGenerator.incrementAndGet();
+            topic.setId(id);
+            topicMap.put(id, topic);
+        } else {
+            topicMap.replace(topic.getId(), topic);
+        }
     }
 
     public Optional<Topic> findById(Long id) {
