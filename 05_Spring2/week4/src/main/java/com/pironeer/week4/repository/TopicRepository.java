@@ -1,6 +1,6 @@
 package com.pironeer.week4.repository;
 
-import com.pironeer.week4.domain.Topic;
+import com.pironeer.week4.repository.domain.Topic;
 import org.springframework.stereotype.Repository;
 
 import java.util.HashMap;

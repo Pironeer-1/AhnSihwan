@@ -1,6 +1,6 @@
 package com.pironeer.week4.dto.response;
 
-import com.pironeer.week4.domain.Topic;
+import com.pironeer.week4.repository.domain.Topic;
 import java.time.LocalDateTime;
 
 public record TopicResponse(

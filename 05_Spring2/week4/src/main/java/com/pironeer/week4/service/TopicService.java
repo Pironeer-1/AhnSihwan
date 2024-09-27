@@ -1,6 +1,7 @@
 package com.pironeer.week4.service;
 
-import com.pironeer.week4.domain.Topic;
+import com.pironeer.week4.mapper.TopicMapper;
+import com.pironeer.week4.repository.domain.Topic;
 import com.pironeer.week4.dto.request.TopicCreateRequest;
 import com.pironeer.week4.dto.request.TopicUpdateRequest;
 import com.pironeer.week4.dto.response.TopicResponse;
@@ -19,12 +20,8 @@ public class TopicService {
     // 새로운 Topic 저장
     public void save(TopicCreateRequest request) {
         LocalDateTime now = LocalDateTime.now();
-        Topic topic = Topic.builder()
-                .title(request.title())
-                .content(request.content())
-                .createdAt(now)
-                .updatedAt(now)
-                .build();
+        // TopicMapper 활용해서 Topic 객체 생성
+        Topic topic = TopicMapper.from(request);
         topicRepository.save(topic);
     }
 
