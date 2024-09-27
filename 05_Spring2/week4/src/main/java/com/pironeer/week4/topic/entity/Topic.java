@@ -1,4 +1,4 @@
-package com.pironeer.week4.repository.domain;
+package com.pironeer.week4.topic.entity;
 
 import lombok.Builder;
 import lombok.Getter;

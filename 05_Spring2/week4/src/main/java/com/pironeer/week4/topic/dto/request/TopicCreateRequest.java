@@ -1,4 +1,4 @@
-package com.pironeer.week4.dto.request;
+package com.pironeer.week4.topic.dto.request;
 
 import jakarta.validation.constraints.NotNull;
 

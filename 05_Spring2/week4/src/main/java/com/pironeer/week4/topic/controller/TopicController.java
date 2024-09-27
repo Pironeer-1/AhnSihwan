@@ -1,9 +1,9 @@
-package com.pironeer.week4.controller;
+package com.pironeer.week4.topic.controller;
 
-import com.pironeer.week4.dto.request.TopicCreateRequest;
-import com.pironeer.week4.dto.request.TopicUpdateRequest;
-import com.pironeer.week4.dto.response.TopicResponse;
-import com.pironeer.week4.service.TopicService;
+import com.pironeer.week4.topic.dto.request.TopicCreateRequest;
+import com.pironeer.week4.topic.dto.request.TopicUpdateRequest;
+import com.pironeer.week4.topic.dto.response.TopicResponse;
+import com.pironeer.week4.topic.service.TopicService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

@@ -1,8 +1,8 @@
-package com.pironeer.week4.mapper;
+package com.pironeer.week4.gloabl.mapper;
 
-import com.pironeer.week4.dto.request.TopicCreateRequest;
-import com.pironeer.week4.dto.request.TopicUpdateRequest;
-import com.pironeer.week4.repository.domain.Topic;
+import com.pironeer.week4.topic.dto.request.TopicCreateRequest;
+import com.pironeer.week4.topic.dto.request.TopicUpdateRequest;
+import com.pironeer.week4.topic.entity.Topic;
 
 import java.time.LocalDateTime;
 
