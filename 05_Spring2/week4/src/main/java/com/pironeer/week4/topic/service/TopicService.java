@@ -1,6 +1,9 @@
 package com.pironeer.week4.topic.service;
 
-import com.pironeer.week4.gloabl.mapper.TopicMapper;
+import com.pironeer.week4.global.dto.response.result.ListResult;
+import com.pironeer.week4.global.dto.response.result.SingleResult;
+import com.pironeer.week4.global.mapper.TopicMapper;
+import com.pironeer.week4.global.service.ResponseService;
 import com.pironeer.week4.topic.entity.Topic;
 import com.pironeer.week4.topic.dto.request.TopicCreateRequest;
 import com.pironeer.week4.topic.dto.request.TopicUpdateRequest;
@@ -19,34 +22,32 @@ public class TopicService {
 
     // 새로운 Topic 저장
     public void save(TopicCreateRequest request) {
-        LocalDateTime now = LocalDateTime.now();
         // TopicMapper 활용해서 Topic 객체 생성
         Topic topic = TopicMapper.from(request);
         topicRepository.save(topic);
     }
 
     // Topic ID로 조회
-    public TopicResponse findById(Long id) {
+    public SingleResult<TopicResponse> findById(Long id) {
         Topic topic = topicRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("TOPIC NOT FOUND"));
-        return TopicResponse.of(topic);
+        return ResponseService.getSingleResult(TopicResponse.of(topic));
     }
 
     // 모든 Topic 조회
-    public List<TopicResponse> findAll() {
+    public ListResult<TopicResponse> findAll() {
         List<Topic> topics = topicRepository.findAll();
-        return topics.stream().map(TopicResponse::of).toList();
+        List<TopicResponse> list = topics.stream().map(TopicResponse::of).toList();
+        return ResponseService.getListResult(list);
     }
 
     // Topic 업데이트
-    public TopicResponse update(TopicUpdateRequest request) {
+    public SingleResult<TopicResponse> update(TopicUpdateRequest request) {
         Topic topic = topicRepository.findById(request.id())
                 .orElseThrow(() -> new RuntimeException("TOPIC NOT FOUND"));
-        if (request.title() != null) topic.setTitle(request.title());
-        if (request.content() != null) topic.setContent(request.content());
-        topic.setUpdatedAt(LocalDateTime.now());
-        topicRepository.save(topic);
-        return TopicResponse.of(topic);
+        Topic updatedTopic = TopicMapper.from(request, topic);
+        topicRepository.save(updatedTopic);
+        return ResponseService.getSingleResult(TopicResponse.of(updatedTopic));
     }
 
     // Topic 삭제

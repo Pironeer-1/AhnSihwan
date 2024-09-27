@@ -1,4 +1,4 @@
-package com.pironeer.week4.gloabl.mapper;
+package com.pironeer.week4.global.mapper;
 
 import com.pironeer.week4.topic.dto.request.TopicCreateRequest;
 import com.pironeer.week4.topic.dto.request.TopicUpdateRequest;
