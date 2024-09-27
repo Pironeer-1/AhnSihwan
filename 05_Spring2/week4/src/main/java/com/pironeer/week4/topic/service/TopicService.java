@@ -2,6 +2,8 @@ package com.pironeer.week4.topic.service;
 
 import com.pironeer.week4.global.dto.response.result.ListResult;
 import com.pironeer.week4.global.dto.response.result.SingleResult;
+import com.pironeer.week4.global.exception.CustomException;
+import com.pironeer.week4.global.exception.ErrorCode;
 import com.pironeer.week4.global.mapper.TopicMapper;
 import com.pironeer.week4.global.service.ResponseService;
 import com.pironeer.week4.topic.entity.Topic;
@@ -22,7 +24,9 @@ public class TopicService {
 
     // 새로운 Topic 저장
     public void save(TopicCreateRequest request) {
-        // TopicMapper 활용해서 Topic 객체 생성
+        if (request.title() == null || request.title().isBlank()) {
+            throw new CustomException(ErrorCode.INVALID_PARAMETER);
+        }
         Topic topic = TopicMapper.from(request);
         topicRepository.save(topic);
     }
@@ -30,7 +34,7 @@ public class TopicService {
     // Topic ID로 조회
     public SingleResult<TopicResponse> findById(Long id) {
         Topic topic = topicRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("TOPIC NOT FOUND"));
+                .orElseThrow(() -> new CustomException(ErrorCode.OBJECT_NOT_FOUND));
         return ResponseService.getSingleResult(TopicResponse.of(topic));
     }
 
@@ -44,7 +48,7 @@ public class TopicService {
     // Topic 업데이트
     public SingleResult<TopicResponse> update(TopicUpdateRequest request) {
         Topic topic = topicRepository.findById(request.id())
-                .orElseThrow(() -> new RuntimeException("TOPIC NOT FOUND"));
+                .orElseThrow(() -> new CustomException(ErrorCode.OBJECT_NOT_FOUND));
         Topic updatedTopic = TopicMapper.from(request, topic);
         topicRepository.save(updatedTopic);
         return ResponseService.getSingleResult(TopicResponse.of(updatedTopic));
@@ -52,6 +56,9 @@ public class TopicService {
 
     // Topic 삭제
     public void deleteById(Long id) {
+        if (!topicRepository.findById(id).isPresent()) {
+            throw new CustomException(ErrorCode.OBJECT_NOT_FOUND);
+        }
         topicRepository.deleteById(id);
     }
 }
